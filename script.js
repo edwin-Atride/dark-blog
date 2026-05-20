@@ -38,7 +38,8 @@ loginBtn.addEventListener('click', async () => {
   })
 
   if (error) {
-    alert("Connexion refusée")
+    alert(error.message)
+    console.log(error)
     return
   }
 
