@@ -19,6 +19,7 @@ const adminPanel = document.getElementById('adminPanel')
 const titleInput = document.getElementById('title')
 const contentInput = document.getElementById('content')
 const imageInput = document.getElementById('imageInput')
+const youtubeInput = document.getElementById('youtubeInput')
 
 const publishBtn = document.getElementById('publishBtn')
 
@@ -149,15 +150,16 @@ publishBtn.addEventListener('click', async () => {
     imageBase64 = await toBase64(file)
   }
 
-  const { error } = await supabaseClient
-    .from('posts')
-    .insert([
-      {
-        title,
-        content,
-        image: imageBase64
-      }
-    ])
+const { error } = await supabaseClient
+  .from('posts')
+  .insert([
+    {
+      title,
+      content,
+      image: imageBase64,
+      youtube: youtubeInput.value
+    }
+  ])
 
   if (error) {
     alert(error.message)
@@ -167,6 +169,7 @@ publishBtn.addEventListener('click', async () => {
   titleInput.value = ''
   contentInput.value = ''
   imageInput.value = ''
+  youtubeInput.value = ''
 
   renderPosts()
 })
