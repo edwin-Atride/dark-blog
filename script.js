@@ -67,18 +67,63 @@ async function renderPosts() {
 
   postsContainer.innerHTML = ''
 
+  const {
+    data: { session },
+  } = await supabaseClient.auth.getSession()
+
+  const isAdmin = !!session
+
   data.forEach(post => {
     const div = document.createElement('div')
 
     div.className = 'post'
 
+    let youtubeEmbed = ''
+
+    if (post.youtube) {
+      let videoId = ''
+
+      if (post.youtube.includes('watch?v=')) {
+        videoId = post.youtube.split('watch?v=')[1]
+      } else if (post.youtube.includes('youtu.be/')) {
+        videoId = post.youtube.split('youtu.be/')[1]
+      }
+
+      youtubeEmbed = `
+        <iframe
+          width="100%"
+          height="400"
+          src="https://www.youtube.com/embed/${videoId}"
+          frameborder="0"
+          allowfullscreen
+          style="margin-top:20px;border-radius:18px;"
+        ></iframe>
+      `
+    }
+
     div.innerHTML = `
       <h2>${post.title}</h2>
+
       <p>${post.content}</p>
 
       ${
         post.image
           ? `<img src="${post.image}" alt="image">`
+          : ''
+      }
+
+      ${youtubeEmbed}
+
+      ${
+        isAdmin
+          ? `
+            <button
+              class="deleteBtn"
+              onclick="deletePost(${post.id})"
+            >
+              Supprimer
+            </button>
+          `
           : ''
       }
     `
@@ -139,3 +184,16 @@ function toBase64(file) {
 }
 
 renderPosts()
+
+async function deletePost(id) {
+  const confirmDelete = confirm("Supprimer ce post ?")
+
+  if (!confirmDelete) return
+
+  await supabaseClient
+    .from('posts')
+    .delete()
+    .eq('id', id)
+
+  renderPosts()
+}
