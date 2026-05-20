@@ -1,2 +1,2 @@
-const SUPABASE_URL = "https://pdzmytgrdvtmnrjbjohm.supabase.co/rest/v1/"
+const SUPABASE_URL = "https://pdzmytgrdvtmnrjbjohm.supabase.co"
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBkem15dGdyZHZ0bW5yamJqb2htIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNjQ5OTEsImV4cCI6MjA5NDg0MDk5MX0.AGbKNagYC_88O9wpaDv0fQXsNOGxct4uTYDwJU-0jDw"
