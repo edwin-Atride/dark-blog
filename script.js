@@ -49,6 +49,8 @@ loginBtn.addEventListener('click', async () => {
 
   adminBtn.classList.add('hidden')
   logoutBtn.classList.remove('hidden')
+
+  renderPosts()
 })
 
 logoutBtn.addEventListener('click', async () => {
@@ -58,6 +60,8 @@ logoutBtn.addEventListener('click', async () => {
 
   adminBtn.classList.remove('hidden')
   logoutBtn.classList.add('hidden')
+
+  renderPosts()
 })
 
 async function renderPosts() {
