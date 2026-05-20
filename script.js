@@ -7,6 +7,7 @@ const supabaseClient = createClient(
 
 const adminBtn = document.getElementById('adminBtn')
 const logoutBtn = document.getElementById('logoutBtn')
+const togglePanelBtn = document.getElementById('togglePanelBtn')
 
 const loginModal = document.getElementById('loginModal')
 const loginBtn = document.getElementById('loginBtn')
@@ -49,8 +50,21 @@ loginBtn.addEventListener('click', async () => {
 
   adminBtn.classList.add('hidden')
   logoutBtn.classList.remove('hidden')
+  togglePanelBtn.classList.remove('hidden')
 
   renderPosts()
+})
+
+togglePanelBtn.addEventListener('click', () => {
+
+  adminPanel.classList.toggle('hidden')
+
+  if (adminPanel.classList.contains('hidden')) {
+    togglePanelBtn.textContent = 'Afficher le panneau'
+  } else {
+    togglePanelBtn.textContent = 'Cacher le panneau'
+  }
+
 })
 
 logoutBtn.addEventListener('click', async () => {
@@ -60,6 +74,7 @@ logoutBtn.addEventListener('click', async () => {
 
   adminBtn.classList.remove('hidden')
   logoutBtn.classList.add('hidden')
+  togglePanelBtn.classList.add('hidden')
 
   renderPosts()
 })
