@@ -143,3 +143,9 @@ textarea {
   flex-direction: column;
   gap: 15px;
 }
+
+.deleteBtn {
+  margin-top: 20px;
+  background: #ef4444;
+  color: white;
+}
